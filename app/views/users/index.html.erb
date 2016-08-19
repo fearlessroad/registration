@@ -1,0 +1,36 @@
+<div id="container">
+		<h2>Welcome!</h2>
+		<FIELDSET class="layout">
+			<legend>Register</legend>
+			<% if flash[:errors] %>
+				<% flash[:errors].each do |e| %>
+					<%= e %>
+				<% end %>
+			<% end %>
+			<form action="/create" method="post">
+			<input name='authenticity_token' value='<%= form_authenticity_token %>' type='hidden'>
+				<label>First Name</label><input type="text" name="first_name"><br>
+				<label>Last Name</label><input type="text" name="last_name"><br>
+				<label>Email</label><input type="email" name="email"><br>
+				<label>Location</label>
+					<input id="city" type="text" name="location[city]">
+					<select name="location[state]">
+						<% @state_array.each do |s| %>
+						<option value="<%= s %>"><%=s %></option>
+						<% end %>
+					</select><br>
+				<label>Password</label><input type="password" name="password"><br><span class="errors">*Password must be at least 8 characters</span>
+				<label>Confirm Password</label><input type="password" name="password_confirmation"><br>
+				<button>Register</button>
+			</form>
+		</FIELDSET>
+		<FIELDSET class="layout">
+			<legend>Login</legend>
+			<form action="/sessions/create" method="post">
+			<input name='authenticity_token' value='<%= form_authenticity_token %>' type='hidden'>
+				<label>Email</label><input type="email" name="user[email]"><br>
+				<label>Password</label><input type="password" name="user[password]"><br>
+				<button>Login</button>
+			</form>
+		</FIELDSET>
+	</div>
